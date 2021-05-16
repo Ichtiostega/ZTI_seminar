@@ -1,17 +1,22 @@
 package com.zti.SeminarBootData.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.GenerationType;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
-@Entity
+@Document(collection = "Student")
 public class Student {
-    public Integer getId() {
+
+    public Student(String name, String surname, Integer album_nr) {
+        this.name = name;
+        this.surname = surname;
+        this.album_nr = album_nr;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,15 +44,8 @@ public class Student {
         this.album_nr = album_nr;
     }
 
-    public Student(String name, String surname, Integer album_nr) {
-        this.name = name;
-        this.surname = surname;
-        this.album_nr = album_nr;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @MongoId
+    private String id;
     private String name;
     private String surname;
     private Integer album_nr;
